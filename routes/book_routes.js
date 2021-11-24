@@ -10,6 +10,7 @@ router.get('/view-books', async (req,res)=>{
     try{
         const bookData =  await Book.find()
         res.json({bookData})
+        console.log("books viewed")
     }catch(error){
         res.status(500)
     }
@@ -40,8 +41,8 @@ router.post('/reg-book', async (req, res)=>{
         try{
             const newBook = await book.save()
             console.log(newBook)
-            res.status(201).json({message: 'new user created', user: newBook})
-            
+            res.status(201).json({message: 'new book added', user: newBook})
+            console.log("books added")
             
             
         }catch(error){
@@ -54,6 +55,7 @@ router.delete('/book-delete/:isbn', async function (req, res) {
     const isbn = req.params.isbn;
     const bookDel = await Book.deleteOne({isbn: isbn});
     res.status(221).json({message:"Updated Succesfully",doc:bookDel})
+    console.log("books deleted")
 });
 
 router.post("/search_books",(req,res)=>{
